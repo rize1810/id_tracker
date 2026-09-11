@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       SELECT id FROM registrations
       WHERE UPPER(bushi_navi_id) = ${normalized_id}
         AND game = ${game}
-        AND created_at::date = CURRENT_DATE
+        AND (created_at AT TIME ZONE 'Asia/Manila')::date = (NOW() AT TIME ZONE 'Asia/Manila')::date
     `
 
     if (existing.length > 0) {
