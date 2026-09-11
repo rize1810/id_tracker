@@ -15,7 +15,10 @@ type Registration = {
 type AlertState = { type: 'success' | 'error'; message: string } | null
 
 function formatDateKey(dateStr: string): string {
-  return new Date(dateStr).toISOString().split('T')[0]
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Manila',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date(dateStr))  // Returns YYYY-MM-DD in Manila time
 }
 
 function formatDateLabel(dateKey: string): string {
@@ -33,7 +36,7 @@ function formatTime(dateStr: string): string {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
-    timeZone: 'UTC',
+    timeZone: 'Asia/Manila',
   }).format(new Date(dateStr))
 }
 
